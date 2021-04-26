@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:training_application/shared/consts/reusable_colors.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  final Function _onPressed;
-  final String _text;
+  final Function onPressed;
+  final String text;
 
-  CustomElevatedButton({ onPressed, text = '' }) :
-    this._onPressed = onPressed,
-    this._text = text,
+  CustomElevatedButton({ this.onPressed, this.text = '' }) :
     assert(text != null, 'Text should not be null!');
 
   @override
@@ -28,8 +26,8 @@ class CustomElevatedButton extends StatelessWidget {
         minimumSize: Size(double.infinity, 56.0),
         elevation: 0.0
       ),
-      onPressed: _onPressed,
-      child: Text(_text)
+      onPressed: onPressed,
+      child: Text(text)
     );
   }
 }

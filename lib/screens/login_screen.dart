@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:training_application/screens/profile_screen.dart';
 import 'package:training_application/shared/consts/reusable_colors.dart';
+import 'package:training_application/shared/enums/input_type_enum.dart';
 import 'package:training_application/shared/widgets/custom_elevated_button.dart';
 import 'package:training_application/shared/widgets/custom_text_form_field.dart';
 
@@ -60,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                 _defaultPadding(
                   CustomTextFormField(
                     hintText: 'Password',
-                    suffixIcon: true
+                    inputType: EInputType.PASSWORD
                   )
                 ),
                 _defaultPadding(

@@ -8,4 +8,7 @@ class ReusableColors {
   static const Color errorColor = Colors.red;
   static const Color profileBgColor = Color(0xFFF8F2EE);
   static const Color profileBorderColor = Color(0xFF6DB9DE);
+  static const Color selectedItemColor = Color(0xFF3789AC);
+  static const Color secondaryTextColor = Color(0xFF333333);
+  static const Color tileBgColor = Color(0xFFF8F2EE);
 }

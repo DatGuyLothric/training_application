@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:training_application/shared/consts/reusable_colors.dart';
+import 'package:training_application/shared/enums/input_type_enum.dart';
 import 'package:training_application/shared/validators/form_field_validator.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  final String _hintText;
-  final bool _suffixIcon;
+  final String hintText;
+  final EInputType inputType;
+  final Function callback;
 
-  CustomTextFormField({ hintText = '', suffixIcon = false }) :
-    this._hintText = hintText,
-    this._suffixIcon = suffixIcon,
-    assert(hintText != null, 'Text property should not be set to null!'),
-    assert(suffixIcon != null, 'Bool property should not be set to null!');
+  CustomTextFormField({
+    this.hintText = '',
+    this.inputType = EInputType.DEFAULT,
+    this.callback
+  }) :
+    assert(hintText != null, 'Text property should not be set to null!');
 
   @override
   _CustomTextFormFieldState createState()
@@ -22,14 +25,30 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _obscure = false;
   bool _valid = true;
 
-  bool get _obscureText {
-    return widget._suffixIcon ? _obscure : false;
+  bool get _isIcon => widget.inputType == EInputType.PASSWORD ||
+      widget.inputType == EInputType.SEARCH;
+
+  bool get _obscureText =>
+    widget.inputType == EInputType.PASSWORD ? _obscure : false;
+
+  Color get _suffixColor => !_obscure && !_valid
+    ? ReusableColors.errorColor
+    : ReusableColors.mainTextColor;
+
+  Function get _callback {
+    if (widget.callback != null) return widget.callback;
+    if (widget.inputType == EInputType.PASSWORD) return this._onPressed;
+    return null;
   }
 
-  Color get _suffixColor {
-    return !_obscure && !_valid
-      ? ReusableColors.errorColor
-      : ReusableColors.mainTextColor;
+  String get _icon {
+    if (widget.inputType == EInputType.PASSWORD) {
+      return 'assets/images/visibility 1.svg';
+    }
+    if (widget.inputType == EInputType.SEARCH) {
+      return 'assets/images/search.svg';
+    }
+    return null;
   }
 
   void _onPressed() {
@@ -53,18 +72,18 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         errorStyle: TextStyle(
           color: ReusableColors.errorColor
         ),
-        suffixIcon: widget._suffixIcon
+        suffixIcon: this._isIcon
           ? IconButton(
             icon: SvgPicture.asset(
-              'assets/images/visibility 1.svg',
+              this._icon,
               width: 24.0,
               height: 24.0,
               color: _suffixColor
             ),
-            onPressed: _onPressed,
+            onPressed: this._callback,
           )
           : null,
-        hintText: widget._hintText,
+        hintText: widget.hintText,
         hintStyle: TextStyle(
           fontFamily: 'Rubik',
           fontWeight: FontWeight.w400,

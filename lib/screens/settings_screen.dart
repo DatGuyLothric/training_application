@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:training_application/shared/consts/reusable_colors.dart';
+import 'package:training_application/shared/enums/screen_enum.dart';
+import 'package:training_application/shared/widgets/custom_button.dart';
 import 'package:training_application/shared/widgets/custom_elevated_button.dart';
 import 'package:training_application/shared/widgets/custom_layout.dart';
 import 'package:training_application/shared/widgets/custom_text_form_field.dart';
@@ -19,7 +21,7 @@ class SettingsScreen extends StatelessWidget {
       child: child
     );
   }
-  
+
   void _onPressed(BuildContext context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (BuildContext context) => LoginScreen())
@@ -29,6 +31,16 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomLayout(
+      actions: [
+        Padding(
+          padding: EdgeInsets.only(right: 16.0),
+          child: CustomButton(
+            icon: Icons.delete,
+            onButtonTap: () {},
+          ),
+        )
+      ],
+      currentScreen: EScreen.SETTINGS,
       body: Flex(
         direction: Axis.vertical,
         mainAxisAlignment: MainAxisAlignment.start,

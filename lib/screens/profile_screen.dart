@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:training_application/screens/settings_screen.dart';
 import 'package:training_application/shared/consts/reusable_colors.dart';
+import 'package:training_application/shared/enums/screen_enum.dart';
 import 'package:training_application/shared/widgets/custom_layout.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -13,13 +14,14 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomLayout(
+      currentScreen: EScreen.PROFILE,
       body: Flex(
         direction: Axis.vertical,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 52.0),
+            padding: EdgeInsets.only(top: 52.0, bottom: 32.0),
             child:  GestureDetector(
               onTap: () => _onPressed(context),
               child: Hero(
@@ -37,6 +39,33 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 )
               ),
+            )
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 16.0, right: 16.0),
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                textStyle: TextStyle(
+                  fontFamily: 'Rubik',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24.0,
+                  letterSpacing: -0.5,
+                  color: ReusableColors.mainTextColor,
+                ),
+                primary: Colors.white,
+                onPrimary: ReusableColors.mainTextColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                side: BorderSide(
+                  width: 1.0,
+                  color: ReusableColors.inputBorderColor
+                ),
+                minimumSize: Size(double.infinity, 80.0),
+                elevation: 0.0
+              ),
+              child: Text('Show onboarding')
             )
           )
         ],
